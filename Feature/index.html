@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Story Behind the Billion-Dollar License Plate | Paying Over HK$20 Million for a Single Letter · Hong Kong Plate Game</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="https://public.flourish.studio/resources/embed.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+font-family: 'Inter', sans-serif;
+background-color: #0B0705;
+color: #ECE3D5;
+line-height: 1.55;
+scroll-behavior: smooth;
+overflow-x: hidden;
+}
+:root {
+--deep-ink: #0A0604;
+--charcoal-black: #17120E;
+--coffee-dark: #3E2A21;
+--coffee-rich: #5C3E2E;
+--coffee-mid: #7B563C;
+--golden-yellow: #E0AE3C;
+--bright-yellow: #F5C542;
+--amber-glow: #F0B429;
+--sand-light: #F9EFD9;
+--text-light: #FEF5E7;
+--text-muted: #C6BCA7;
+--card-bg: rgba(28, 20, 16, 0.85);
+--border-gold: rgba(224, 174, 60, 0.5);
+--coffee-light: #8B694C;
+}
+body {
+background-image: url('');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+background-repeat: no-repeat;
+transition: background-image 0.5s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+body.second-bg {
+background-image: url('9521775396135_.pic_hd.jpg');
+}
+body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-image:
+repeating-linear-gradient(45deg, rgba(111, 78, 55, 0.03) 0px, rgba(111, 78, 55, 0.03) 2px, transparent 2px, transparent 8px),
+radial-gradient(circle at 20% 40%, rgba(229, 181, 59, 0.02) 0%, transparent 40%);
+pointer-events: none;
+z-index: -1;
+}
+.text-black-box, .story-card .text-black-box, .hero-title-block .text-black-box, .lead-text-box, .game-card-wrapper .game-card-trigger {
+background: rgba(0, 0, 0, 0.75);
+backdrop-filter: blur(6px);
+border-radius: 1.2rem;
+padding: 2rem;
+margin-bottom: 1.5rem;
+}
+.story-card {
+margin-bottom: 2rem;
+}
+.story-card p, .story-card .inline-stats, .story-card .figure-block, .story-card .bidding-chart-card, .story-card .local-chart-card, .story-card .pictogram-card, .story-card .flourish-embed {
+margin-bottom: 1.2rem;
+}
+.story-card .pictogram-card {
+background: #FFCD00;
+border-radius: 1.8rem;
+padding: 1.2rem;
+}
+.story-card .bidding-chart-card, .story-card .local-chart-card {
+background: rgba(0, 0, 0, 0.65);
+backdrop-filter: blur(4px);
+border-radius: 1.8rem;
+padding: 1.2rem;
+border: 1px solid var(--coffee-mid);
+}
+.bidding-chart-card canvas {
+max-height: 400px;
+width: 100%;
+background: rgba(15, 12, 9, 0.8);
+border-radius: 1rem;
+padding: 0.5rem;
+}
+.story-card .figure-block {
+background: #130D0A;
+border-radius: 1.5rem;
+padding: 1.5rem;
+border-left: 6px solid var(--golden-yellow);
+}
+.story-card > *:not(.part-badge):not(.footnote):not(style):not(.icons-grid-picto):not(.car-icon-unit):not(.flourish-embed) {
+background: rgba(0, 0, 0, 0.75);
+backdrop-filter: blur(4px);
+border-radius: 1.2rem;
+padding: 1.2rem 1.5rem;
+}
+.story-card .bidding-chart-card,
+.story-card .local-chart-card,
+.story-card .pictogram-card,
+.story-card .figure-block,
+.story-card .flourish-embed {
+background: rgba(0, 0, 0, 0.65);
+backdrop-filter: blur(4px);
+padding: 1.2rem;
+}
+.story-card .pictogram-card {
+background: rgba(255, 205, 0, 0.65) !important;
+backdrop-filter: blur(4px);
+}
+.flourish-embed {
+width: 100%;
+min-height: 500px;
+border-radius: 1.2rem;
+overflow: hidden;
+filter: grayscale(0.3) brightness(0.95);
+transition: filter 0.3s ease;
+}
+.flourish-embed iframe {
+width: 100%;
+min-height: 500px;
+border-radius: 1.2rem;
+}
+.story-card .inline-stats .stat-bubble {
+background: rgba(0, 0, 0, 0.8);
+}
+.story-card .part-badge {
+display: inline-block;
+background: #2A1D17;
+backdrop-filter: none;
+padding: 0.2rem 1rem;
+margin-bottom: 0.5rem;
+border-left: 3px solid var(--bright-yellow);
+}
+.hero-scroll-section {
+position: relative;
+min-height: 100vh;
+z-index: 10;
+background: transparent;
+}
+.hero-fixed-bg {
+position: fixed;
+top: 0;
+left: 280px;
+right: 0;
+width: auto;
+height: 100vh;
+background-image: url('WechatIMG1687.jpg');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+z-index: -2;
+transition: opacity 0.6s ease;
+}
+.hero-sticky-container {
+position: relative;
+width: 100%;
+min-height: 220vh;
+}
+.hero-sticky-elements {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: calc(100% - 280px);
+    margin-left: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    z-index: 15;
+}
+.stage-item {
+position: absolute;
+width: 100%;
+max-width: 800px;
+text-align: center;
+opacity: 0;
+transform: translateY(36px);
+transition: opacity 0.75s cubic-bezier(0.2, 0.9, 0.4, 1), transform 0.7s ease;
+pointer-events: auto;
+}
+.stage-item.active {
+opacity: 1;
+transform: translateY(0);
+}
+.stage-item.exit {
+opacity: 0;
+transform: translateY(-45px);
+}
+.hero-title-block h1 {
+font-size: 2.5rem;
+font-weight: 800;
+line-height: 1.2;
+letter-spacing: -0.5px;
+}
+.hero-title-block h1 span { color: var(--bright-yellow); text-shadow: 0 0 6px rgba(229, 181, 59, 0.4); }
+.hero-title-block .sub {
+font-size: 1.4rem;
+color: var(--text-muted);
+margin-top: 0.8rem;
+font-weight: 400;
+}
+.lead-text {
+font-size: 1.2rem;
+line-height: 1.6;
+max-width: 800px;
+margin: 0 auto;
+}
+.game-card-trigger {
+background: rgba(0, 0, 0, 0.85);
+backdrop-filter: blur(6px);
+border-radius: 2rem;
+padding: 1.8rem 1.2rem;
+text-align: center;
+box-shadow: 0 25px 35px -15px black;
+border: 1px solid var(--coffee-light);
+transition: transform 0.2s ease, border-color 0.2s;
+cursor: pointer;
+width: 100%;
+max-width: 480px;
+margin: 0 auto;
+pointer-events: auto;
+}
+.game-card-trigger:hover { transform: translateY(-6px); border-color: var(--golden-yellow); }
+.license-plate {
+background: #11100C;
+border-radius: 1rem;
+padding: 1.8rem 1rem;
+margin-bottom: 1rem;
+border: 2px solid #6F4E37;
+}
+.plate-number {
+font-size: 4rem;
+font-weight: 800;
+letter-spacing: 8px;
+background: linear-gradient(135deg, #F9D976, #F39F2E);
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+}
+.auction-tag { color: #e0b069; font-weight: 500; }
+.container {
+    max-width: calc(100% - 320px);
+    margin-left: 300px;
+    margin-right: 2rem;
+    padding: 1rem 1.5rem 3rem;
+}
+.fixed-sidebar {
+position: fixed;
+left: 0;
+top: 0;
+height: 100vh;
+width: 260px;
+background: linear-gradient(145deg, #0F0B08 0%, #1A130E 100%);
+border-right: 1px solid #6F4E37;
+z-index: 1000;
+font-family: 'Inter', sans-serif;
+backdrop-filter: blur(2px);
+box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+transition: transform 0.3s ease;
+overflow-y: auto;
+}
+.sidebar-inner {
+display: flex;
+flex-direction: column;
+height: 100%;
+padding: 2rem 1rem 1.5rem 1.5rem;
+}
+.sidebar-nav ul {
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+flex-direction: column;
+gap: 0.8rem;
+}
+.sidebar-nav li a {
+display: flex;
+align-items: center;
+gap: 0.8rem;
+padding: 0.6rem 1rem;
+border-radius: 40px;
+font-weight: 500;
+font-size: 0.9rem;
+color: #C7BCA6;
+text-decoration: none;
+transition: all 0.2s ease;
+}
+.sidebar-nav li a .nav-num {
+font-size: 0.75rem;
+font-weight: 600;
+color: #8B6244;
+width: 28px;
+}
+.sidebar-nav li a:hover, .sidebar-nav li a.active {
+background: linear-gradient(90deg, rgba(229, 181, 59, 0.2), rgba(111, 78, 55, 0.3));
+color: #FFDF8C;
+border-left: 3px solid #E5B53B;
+border-radius: 40px 0 0 40px;
+}
+.sidebar-footer {
+margin-top: auto;
+padding-top: 0.5rem;
+}
+.mini-license {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 1rem;
+}
+.mini-plate-bg {
+background: #0C0A07;
+border: 1.5px solid #E5B53B;
+border-radius: 6px;
+padding: 6px 12px;
+width: fit-content;
+}
+.mini-plate-text {
+font-family: monospace;
+font-weight: 800;
+font-size: 1.1rem;
+letter-spacing: 2px;
+background: linear-gradient(135deg, #F9D976, #E5B53B);
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+}
+.auction-gavel {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin: 0.8rem 0 1rem;
+}
+.gavel-icon {
+font-size: 2.2rem;
+color: #D4A837;
+filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+animation: knockGavel 1.4s infinite ease-in-out;
+}
+.gavel-shadow {
+width: 28px;
+height: 4px;
+background: rgba(0,0,0,0.3);
+border-radius: 50%;
+margin-top: 6px;
+animation: shadowPulse 1.4s infinite ease;
+}
+.gavel-caption {
+font-size: 0.65rem;
+color: #E5B53B;
+margin-top: 6px;
+font-weight: 500;
+background: rgba(0,0,0,0.4);
+padding: 2px 8px;
+border-radius: 20px;
+}
+.progress-bar-container {
+width: 100%;
+height: 2px;
+background: #3E2A21;
+border-radius: 4px;
+margin-bottom: 0.6rem;
+overflow: hidden;
+}
+.progress-bar-fill {
+width: 0%;
+height: 100%;
+background: linear-gradient(90deg, #E5B53D, #F5C542);
+border-radius: 4px;
+transition: width 0.1s linear;
+}
+@keyframes knockGavel {
+0% { transform: rotate(0deg) translateY(0); }
+15% { transform: rotate(12deg) translateY(-2px); }
+30% { transform: rotate(-8deg) translateY(1px); }
+45% { transform: rotate(5deg) translateY(0); }
+60% { transform: rotate(0deg) translateY(0); }
+100% { transform: rotate(0deg) translateY(0); }
+}
+@keyframes shadowPulse {
+0% { transform: scaleX(1); opacity: 0.6; }
+30% { transform: scaleX(1.2); opacity: 0.3; }
+60% { transform: scaleX(1); opacity: 0.6; }
+100% { transform: scaleX(1); opacity: 0.6; }
+}
+.stat-highlight { font-weight: 800; color: var(--bright-yellow); background: rgba(229, 181, 59, 0.2); padding: 0 4px; border-radius: 8px; }
+.inline-stats { display: flex; gap: 1.2rem; flex-wrap: wrap; margin: 1.5rem 0; }
+.stat-bubble { background: rgba(0,0,0,0.8); padding: 0.8rem 1.2rem; border-radius: 60px; flex: 1; text-align: center; border: 1px solid #5C3E2E; backdrop-filter: blur(4px); }
+.stat-number { font-size: 1.8rem; font-weight: 800; color: var(--bright-yellow); }
+.pictogram-card .comparison-tag-mini {
+text-align: center;
+font-weight: 700;
+font-size: 1rem;
+background: black;
+color: #FFCD00;
+display: inline-block;
+padding: 4px 14px;
+border-radius: 60px;
+margin-bottom: 1rem;
+}
+.icons-grid-picto {
+display: grid;
+grid-template-columns: repeat(5, minmax(62px, 80px));
+justify-content: center;
+gap: 6px 10px;
+margin: 0.8rem 0;
+}
+.car-svg-picto {
+width: 58px;
+height: 58px;
+filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+.picto-caption {
+background: rgba(0,0,0,0.7);
+display: inline-block;
+padding: 2px 12px;
+border-radius: 60px;
+color: #FFCD00;
+font-size: 0.7rem;
+}
+.footnote { font-size: 0.75rem; color: #A58362; margin-top: 1rem; border-top: 1px dashed #3E2A21; padding-top: 1rem; }
+footer { margin-top: 3rem; text-align: center; padding: 1.5rem 0; border-top: 1px solid #3E2A21; font-size: 0.75rem; color: #8B735A; background: transparent; }
+.game-iframe-wrapper {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.95);
+z-index: 20000;
+display: none;
+justify-content: center;
+align-items: center;
+padding: 1rem;
+}
+.game-iframe-wrapper.show { display: flex; }
+.game-iframe-wrapper iframe {
+width: 90%;
+max-width: 800px;
+height: 80vh;
+border: 2px solid var(--golden-yellow);
+border-radius: 2rem;
+background: #1E1915;
+}
+.close-iframe {
+position: absolute;
+top: 2rem;
+right: 2rem;
+font-size: 2.5rem;
+color: #fff;
+cursor: pointer;
+background: rgba(0,0,0,0.5);
+width: 50px;
+height: 50px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.close-iframe:hover { background: #f12711; }
+@media (max-width: 780px) {
+.container { margin-left: 0; margin-right: 0; padding: 1rem; }
+.fixed-sidebar { transform: translateX(-100%); }
+.hero-title-block h1 { font-size: 2rem; }
+.hero-title-block .sub { font-size: 1rem; }
+.stage-item { width: 90%; }
+.hero-fixed-bg { left: 0; }
+.hero-sticky-elements { width: 100%; margin-left: 0; }
+}
+</style>
+</head>
+<body>
+<div class="game-iframe-wrapper" id="gameIframeWrapper">
+<span class="close-iframe" onclick="closeGameIframe()">&times;</span>
+<iframe src="game.html" frameborder="0"></iframe>
+</div>
+<aside class="fixed-sidebar">
+<div class="sidebar-inner">
+<nav class="sidebar-nav">
+<ul>
+<li><a href="#part1" class="sidebar-link" data-section="part1"><span class="nav-num">01</span> Auction Scene</a></li>
+<li><a href="#part2" class="sidebar-link" data-section="part2"><span class="nav-num">02</span> Feng Shui & Symbolism</a></li>
+<li><a href="#part3" class="sidebar-link" data-section="part3"><span class="nav-num">03</span> Scarce Assets</a></li>
+<li><a href="#part4" class="sidebar-link" data-section="part4"><span class="nav-num">04</span> Fund Flow</a></li>
+<li><a href="#part5" class="sidebar-link" data-section="part5"><span class="nav-num">05</span> Institutional Questions</a></li>
+</ul>
+</nav>
+<div class="sidebar-footer">
+<div class="mini-license"><div class="mini-plate-bg"><span class="mini-plate-text">HONG KONG</span></div></div>
+<div class="auction-gavel"><div class="gavel-icon"><i class="fas fa-gavel"></i></div><div class="gavel-shadow"></div></div>
+<div class="progress-bar-container"><div class="progress-bar-fill"></div></div>
+</div>
+</div>
+</aside>
+
+<!-- Hero scrolling stage -->
+<div class="hero-scroll-section">
+<div class="hero-fixed-bg" id="heroFixedBg"></div>
+<div class="hero-sticky-container">
+<div class="hero-sticky-elements">
+<div id="stageTitle" class="stage-item hero-title-block active">
+<div class="text-black-box" style="background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
+<h1>Behind the Billion-Dollar Plate: <span>Paying Over HK$20 Million for a Single Letter</span></h1>
+<div class="sub">Li Jiawei, Wang Zhaoyi, Yang Han, Yu Ziqi, Zhou Ju</div>
+</div>
+</div>
+<div id="stageLead" class="stage-item">
+<div class="text-black-box" style="background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
+<p class="lead-text">On March 1, 2026, at the Hong Kong Convention and Exhibition Centre, a single-letter "H" license plate sold for a staggering HK$20 million, making it the fourth most expensive plate in Hong Kong history. Why is a piece of metal worth so much?</p>
+</div>
+</div>
+<div id="stageGame" class="stage-item">
+    <div class="game-card-trigger" onclick="openGameIframe()">
+        <div class="floating-bubbles">
+            <span class="bubble">🚗</span>
+            <span class="bubble">❓</span>
+            <span class="bubble">💰</span>
+            <span class="bubble">😄</span>
+            <span class="bubble">✨</span>
+            <span class="bubble">🤔</span>
+            <span class="bubble">💭</span>
+            <span class="bubble">🎈</span>
+        </div>
+        <div class="question-area">
+            <div class="big-question">How much is this license plate?</div>
+        </div>
+        <div class="play-btn">
+            <span>Start Game</span>
+        </div>
+    </div>
+</div>
+<style>
+.game-card-trigger {
+    position: relative;
+    background: #0a0a0a;
+    border-radius: 2rem;
+    padding: 3.5rem 2.5rem 3.5rem 2.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 15px 30px -8px rgba(0,0,0,0.5);
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.game-card-trigger:hover {
+    transform: translateY(-4px);
+    border-color: #4a4a4a;
+    box-shadow: 0 20px 40px -12px rgba(0,0,0,0.6);
+}
+.floating-bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+.bubble {
+    position: absolute;
+    font-size: 1.8rem;
+    opacity: 0.3;
+    animation: bubbleFloat 7s ease-in-out infinite;
+}
+.bubble:nth-child(1) { top: 8%; left: 6%; animation-delay: 0s; }
+.bubble:nth-child(2) { top: 75%; left: 10%; animation-delay: 1s; font-size: 2rem; }
+.bubble:nth-child(3) { top: 18%; right: 8%; animation-delay: 2s; }
+.bubble:nth-child(4) { top: 82%; right: 15%; animation-delay: 0.5s; font-size: 1.6rem; }
+.bubble:nth-child(5) { top: 45%; left: 88%; animation-delay: 3s; }
+.bubble:nth-child(6) { top: 55%; left: 3%; animation-delay: 1.5s; font-size: 2.2rem; }
+.bubble:nth-child(7) { top: 15%; right: 22%; animation-delay: 2.5s; }
+.bubble:nth-child(8) { top: 68%; right: 28%; animation-delay: 4s; }
+@keyframes bubbleFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(6deg); }
+}
+.question-area {
+    margin-bottom: 2rem;
+}
+.big-question {
+    font-family: "Press Start 2P", "Courier New", "PingFang SC", monospace;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #f0e6c5;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    text-shadow: 3px 3px 0px #3a2a1a;
+}
+.play-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #E0AE3C, #F5C542);
+    padding: 0.7rem 1.5rem;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 10px rgba(229,181,59,0.35);
+}
+.game-card-trigger:hover .play-btn {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(229,181,59,0.5);
+}
+.play-btn span {
+    font-family: "Press Start 2P", "Courier New", "PingFang SC", monospace;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #1a140e;
+    letter-spacing: 1px;
+}
+@media (max-width: 780px) {
+    .big-question { font-size: 1.2rem; letter-spacing: 1px; }
+    .game-card-trigger { padding: 2.5rem 1.5rem; min-height: 280px; }
+    .play-btn span { font-size: 0.7rem; }
+    .bubble { font-size: 1.3rem; opacity: 0.25; }
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</div>
+</div>
+</div>
+
+<div class="content-after-hero" id="contentAfterHero">
+<div class="container">
+<div class="story-card" id="part1">
+    <div class="text-black-box">
+        <div class="part-badge"><i class="fas fa-arrow-right"></i>Auction Scene</div>
+        <p>On March 1, 2026, the Hong Kong Convention and Exhibition Centre hosted the Lunar New Year license plate auction. Among 49 plates, the most eye-catching was Lot 26: the only single-letter plate, <strong>"H"</strong>.</p>
+        <p>The "H" plate started with a reserve price of <strong>HK$5,000</strong>. Right after the auctioneer announced the starting bid, a bidder called out <strong>HK$5 million</strong>, pushing the price a thousand times higher. The auctioneer quickly adjusted the bidding increments from HK$10,000 all the way up to HK$200,000.</p>
+        <p>Multiple heavyweight bidders took turns raising paddles, and the price quickly exceeded HK$10 million. After 40 minutes and 90 rounds of intense bidding, Bidder No. 135 called out <strong>HK$20 million</strong>.</p>
+        <p>"HK$20 million first—HK$20 million second—HK$20 million, third!" The auctioneer's gavel came down firmly, finalizing the price.</p>
+        <p>The single-letter "H" plate sold for a staggering HK$20 million, making it the fourth most expensive license plate in Hong Kong history.</p>
+        <p>Why would tycoons spend a fortune on a small piece of metal? What are they really paying for? Where does this huge sum of money end up? Behind this seemingly simple transaction of wealth, why does it raise questions about institutional fairness? All of this begins with this license plate, slowly unraveling.</p>
+
+        <div class="bidding-chart-card"><div class="chart-header"><h4><i class="fas fa-chart-line"></i> Bidding Ladder for "H" Plate</h4><span>Key Bidding Milestones (Unit: HK$10,000)</span></div><div class="chart-container"><canvas id="biddingChart" width="800" height="400" style="width:100%; height:auto; max-height:420px"></canvas></div><div class="footnote" style="margin-top: 0.8rem; border-top: none; text-align: center;"><i class="fas fa-chart-simple"></i> Based on live auction records: from reserve price of HK$5,000 → HK$5 million → final HK$20 million, showing a stepped ladder</div></div>
+
+        <div class="pictogram-card" style="background: #000000 !important; backdrop-filter: blur(4px); border-radius: 1.8rem; padding: 1.2rem;">
+            <div style="text-align: center;">
+                <div class="comparison-tag-mini" style="background: #1a1a1a;">⚡ 1 "H" Plate ≈ 25 Toyota Alphards ⚡</div>
+            </div>
+            <div class="icons-grid-picto" id="pictoGrid"></div>
+            <div class="picto-caption" style="color: #FFCD00;">Each icon represents one Toyota Alphard</div>
+            <div class="price-note-left" style="text-align: center; margin-top: 0.8rem; color: #FFCD00; font-weight: 500;">💰 H Plate Price (HK$20M) ≈ 25 Alphards (25 × HK$800K) 💰</div>
+        </div>
+    </div>  
+    <p><span class="stat-highlight">Logic of Wealth Concentration:</span> To understand why someone would pay HK$20 million for a single letter, we must first look at Hong Kong's wealth structure. According to a UBS report, Hong Kong's Gini coefficient is <strong>0.63</strong>, far above the international warning level of 0.4, making it one of the most unequal economies in the world. When wealth is concentrated among a tiny elite, prices no longer reflect just the value of a commodity, but also the ordering of purchasing desires.</p>
+    <p>This logic of concentration is directly reflected in license plate auctions. Single-letter plates are extremely rare but account for the majority of transaction value. In the 2026 Lunar New Year auction, single-letter plates made up only <strong>3%</strong> of the lots but contributed <strong>67%</strong> of the total transaction amount.</p>
+    <div class="text-black-box">
+    <div class="flourish-embed flourish-chart" data-src="visualisation/28738357"></div>
+    <div class="footnote" style="margin-top: 0.8rem; text-align: center; border: none;"><i class="fas fa-database"></i> Source: Hong Kong Transport Department, 2026 Lunar New Year License Plate Auction Records</div>
+</div>
+
+    
+</div>
+
+<div class="story-card" id="part2"><div class="text-black-box" style="background: rgba(0,0,0,0.78);">
+    <div class="part-badge"><i class="fas fa-yin-yang"></i>Feng Shui & Symbolism</div>
+    <p>But wealth alone is not enough. Why this particular form—a license plate? And why the letter "H"?</p>
+    <p>In Hong Kong, feng shui is not mere superstition but a system incorporated into business decisions and architectural designs. Examples include the bronze lion placement at HSBC Plaza and the "sharp blade" design of the Bank of China Tower.</p>
+    <p>License plates are no exception. Letters and numbers are endowed with meanings based on the five elements, shapes, or homophones. For instance, the number 8 represents prosperity, and the letter W symbolizes victory. The letter "H" in this auction corresponds to the Year of the Horse ("Horse"), symbolizing immediate success.</p>
+    <p>When these two characteristics overlap, the billion-dollar plate ceases to be a curiosity and becomes a consumption pattern aligned with the spirit of the times.</p>
+    <div class="inline-stats">
+        <div class="stat-bubble"><i class="fas fa-horse"></i> Year of the Horse · Horse</div>
+        <div class="stat-bubble"><i class="fas fa-dragon"></i> Feng Shui energy blessing</div>
+    </div>
+</div>
+</div>
+
+<div class="story-card" id="part3"><div class="text-black-box"><div class="part-badge"><i class="fas fa-chart-simple"></i>Scarce Assets & Alternative Investments</div><p>Spending HK$20 million on a single letter may seem crazy to outsiders, but in the eyes of Hong Kong's tycoons, it might not be a bad deal.</p>
+<p>The value of a sky-high plate first lies in its scarcity. A mansion can be bought in installments, a yacht can be rented, but a single-letter license plate is a truly non-reproducible rarity. The uniqueness and visual immediacy of a license plate make it an excellent choice for low-key showing off among the wealthy. Without self-introduction, a plate can speak for itself as a status symbol.</p>
+<p>Another part of the answer lies in Hong Kong's deeply ingrained feng shui culture.</p>
+<p>Beyond identity and feng shui, there is also a rational investment consideration. License plates are not consumer goods but tradable assets. Research by scholars such as Terence Chong of the Chinese University of Hong Kong indicates that three-digit plates containing lucky numbers like "8" command a premium of <strong>95%</strong>, and the worse the stock market performs, the higher the premium. For every <strong>1% drop</strong> in the Hang Seng Index, the price of lucky license plates rises by <strong>11%</strong>. Spending HK$20 million today might not lead to a loss if sold three years later.</p>
+<div class="flourish-embed flourish-chart" data-src="visualisation/28738925"></div>
+<div class="footnote" style="margin-top: 0.8rem; text-align: center; border: none;"><i class="fas fa-database"></i> Source: Hong Kong Transport Department, Historical License Plate Auction Records</div>
+</div></div>
+
+<div class="story-card" id="part4"><div class="text-black-box"><div class="part-badge"><i class="fas fa-coins"></i>Fund Flow</div><p>Since license plates have a stable market, where does the auction revenue go?</p>
+<p>Traditional license plates (e.g., AB1234) <strong>all go into</strong> the Government Lotteries Fund after auction, used for rehabilitation services, family support, community kitchens, and other public welfare purposes.</p>
+<p>According to Social Welfare Department data, the Government Lotteries Fund's total revenue in 2024-2025 was approximately <strong>HK$2.3 billion</strong>, with allocations primarily directed to <strong>elderly services (60.24%)</strong> and <strong>rehabilitation services (31.67%)</strong>. License plate auctions are one of the stable sources of revenue.</p>
+<p>In contrast, revenue from personalized plates (such as the single-letter "H") goes to <strong>the government treasury (general revenue)</strong>. The Personalized Vehicle Registration Marks Scheme was first proposed by then-Financial Secretary Henry Tang in his 2004 budget and officially launched in 2006.</p>
+<div class="inline-stats">
+            <div class="stat-bubble"><span class="stat-number">60.24%</span><br>Lotteries Fund → Elderly Services</div>
+            <div class="stat-bubble"><span class="stat-number">31.67%</span><br>Rehabilitation Services</div>
+        </div>
+    </div>
+</div>
+
+<div class="story-card" id="part5"><div class="text-black-box"><div class="part-badge"><i class="fas fa-scale-balanced"></i>Institutional Questions</div><p>Why are the flows of these two types of plate auctions so different?</p>
+<p>In 2005, Henry Tang, then Acting Chief Executive, clearly announced that the net proceeds from the "Personalized License Plate Scheme" would be used for poverty alleviation. Chan Kam-lam, then Chairman of the LegCo's Bills Committee on the Personalized Vehicle Registration Marks Ordinance, said at the time: "Using it for poverty alleviation or the Lotteries Fund, essentially helping those in need, is fine." However, this commitment had a time limit—the government only guaranteed to set aside HK$60 million annually from personalized plate revenues for poverty alleviation during the five years from 2006/07 to 2010/11.</p>
+<p>In fact, the actual revenue from personalized plates fell far short of expectations. The government initially expected to generate HK$70 million per year, but the total revenue over the first five fiscal years was less than HK$200 million, averaging about HK$38 million per year. The government had to <strong>subsidize</strong> the difference—about HK$20 million per year—to maintain the HK$60 million poverty alleviation commitment.</p>
+<p>Since the end of that period, revenue from personalized license plate auctions has <strong>all gone into the government treasury as general revenue</strong> and is no longer specifically used for poverty alleviation or social welfare.</p>
+<p>Critics have raised questions.</p>
+<p>Democratic Party legislator Wong Sing-chi criticized that the government's introduction of the personalized license plate scheme would inevitably lead to a significant reduction in the Lotteries Fund's income, forcing funded agencies to compete with the Social Welfare Department for resources. He called on the government to establish additional mechanisms to fill the reduced income of the Lotteries Fund.</p>
+<p>A 2020 HK01 article, discussing the risk of the Lotteries Fund running dry, also mentioned contributions from the personalized plate scheme, questioning the appropriateness of the fund's allocation and management.</p></div></div>
+
+<div style="background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); border-radius: 1.8rem; padding: 1.5rem; margin: 1rem 0 2rem;"><div><i class="fas fa-donate" style="color: var(--golden-yellow);"></i> This small piece of metal, finally hammered down at HK$20 million, appears to be a tycoon's transaction, but it is also a focal point for many social issues. It shows us that the billion-dollar plate is not an oddity, but a microcosm of Hong Kong's extreme wealth concentration, feng shui culture permeating business decisions, and the shift of conspicuous consumption toward alternative investments.</div></div>
+</div>
+</div>
+
+<script>
+// Hero scrolling transition logic
+const titleEl = document.getElementById('stageTitle');
+const leadEl = document.getElementById('stageLead');
+const gameEl = document.getElementById('stageGame');
+function updateFirstScreenScroll() {
+const scrollY = window.scrollY;
+const viewHeight = window.innerHeight;
+let progress = Math.min(1, scrollY / (viewHeight * 1.0));
+if (progress < 0.28) {
+setActive(titleEl);
+setInactive(leadEl);
+setInactive(gameEl);
+} else if (progress < 0.62) {
+setActive(leadEl);
+setInactive(titleEl);
+setInactive(gameEl);
+} else {
+setActive(gameEl);
+setInactive(titleEl);
+setInactive(leadEl);
+}
+const heroBg = document.getElementById('heroFixedBg');
+if (heroBg) {
+let opacity = Math.max(0, 1 - Math.max(0, (scrollY - viewHeight * 0.6) / (viewHeight * 0.7)));
+heroBg.style.opacity = opacity;
+}
+}
+function setActive(el) { if (el && !el.classList.contains('active')) { el.classList.add('active'); el.classList.remove('exit'); } }
+function setInactive(el) { if (el && el.classList.contains('active')) { el.classList.remove('active'); el.classList.add('exit'); } }
+window.addEventListener('scroll', () => { requestAnimationFrame(updateFirstScreenScroll); });
+updateFirstScreenScroll();
+
+// Background image switching
+const contentAfter = document.getElementById('contentAfterHero');
+const bodyEl = document.body;
+const fixedBgLayer = document.getElementById('heroFixedBg');
+function checkBackgroundSwitch() {
+if (!contentAfter) return;
+const rect = contentAfter.getBoundingClientRect();
+const switchPoint = rect.top <= window.innerHeight - 80;
+if (switchPoint) {
+if (!bodyEl.classList.contains('second-bg')) {
+bodyEl.classList.add('second-bg');
+if(fixedBgLayer) fixedBgLayer.style.opacity = '0';
+}
+} else {
+if (bodyEl.classList.contains('second-bg')) {
+bodyEl.classList.remove('second-bg');
+if(fixedBgLayer && window.scrollY < window.innerHeight * 0.6) fixedBgLayer.style.opacity = '1';
+}
+}
+}
+window.addEventListener('scroll', () => requestAnimationFrame(checkBackgroundSwitch));
+checkBackgroundSwitch();
+
+// Sidebar activation & progress bar
+function updateActiveSection() {
+const sections = ['part1', 'part2', 'part3', 'part4', 'part5'];
+let current = '';
+const scrollPos = window.scrollY + 200;
+for (let id of sections) {
+const el = document.getElementById(id);
+if (el) {
+const top = el.offsetTop;
+const bottom = top + el.offsetHeight;
+if (scrollPos >= top && scrollPos < bottom) { current = id; break; }
+}
+}
+if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 10 && sections.length) current = sections[sections.length-1];
+document.querySelectorAll('.sidebar-link').forEach(link => {
+link.classList.remove('active');
+if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+});
+const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+const percent = (window.scrollY / docHeight) * 100;
+const fill = document.querySelector('.progress-bar-fill');
+if (fill) fill.style.width = percent + '%';
+}
+document.querySelectorAll('.sidebar-link').forEach(link => {
+link.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if (targetId && targetId !== '#') {
+const target = document.querySelector(targetId);
+if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+this.classList.add('active');
+}
+});
+});
+window.addEventListener('scroll', updateActiveSection);
+window.addEventListener('resize', updateActiveSection);
+updateActiveSection();
+
+function openGameIframe() { document.getElementById('gameIframeWrapper').classList.add('show'); document.body.style.overflow = 'hidden'; }
+function closeGameIframe() { document.getElementById('gameIframeWrapper').classList.remove('show'); document.body.style.overflow = 'auto'; }
+
+window.addEventListener('load', function() {
+// Ladder chart drawing (y-axis starts from 0, max 2500)
+const canvas = document.getElementById('biddingChart');
+if (canvas) {
+const biddingPrices = [0.5, 500, 870, 900, 920, 1000, 1880, 1940, 1960, 1980, 2000];
+const emptyLabels = Array(biddingPrices.length).fill('');
+if (window.ChartDataLabels && Chart.register) Chart.register(ChartDataLabels);
+new Chart(canvas, {
+type: 'line',
+data: {
+labels: emptyLabels,
+datasets: [{
+label: 'Bid Price (Unit: HK$10,000)',
+data: biddingPrices,
+borderColor: '#E0AE3C',
+borderWidth: 3,
+fill: false,
+stepped: 'after',
+pointRadius: 5,
+pointBackgroundColor: '#F5C542',
+pointBorderColor: '#8B4513',
+datalabels: {
+formatter: (v) => v + ' (10K HKD)',
+align: 'top',
+offset: 14,
+backgroundColor: 'rgba(20,15,10,0.85)',
+borderRadius: 6,
+color: '#F5E2C1',
+font: { size: 11 }
+}
+}]
+},
+options: {
+responsive: true,
+maintainAspectRatio: true,
+plugins: {
+legend: { display: false },
+tooltip: { enabled: true }
+},
+scales: {
+y: {
+min: 0,
+max: 2500,
+title: { display: true, text: 'Bid Price (Unit: HK$10,000)', color: '#C6BCA7' },
+grid: { color: 'rgba(200,200,200,0.2)' }
+},
+x: {
+ticks: { display: false },
+title: { text: 'Bidding Round', color: '#C6BCA7' }
+}
+}
+}
+});
+}
+const pictoGrid = document.getElementById('pictoGrid');
+if (pictoGrid) {
+    pictoGrid.innerHTML = '';
+    for (let i = 0; i < 25; i++) {
+        const unit = document.createElement('div');
+        unit.className = 'car-icon-unit';
+        unit.style.display = 'flex';
+        unit.style.justifyContent = 'center';
+        unit.style.alignItems = 'center';
+        unit.innerHTML = '<i class="fas fa-car" style="font-size: 40px; color: #F5C542;"></i>';
+        pictoGrid.appendChild(unit);
+    }
+}
+// Re-trigger Flourish chart loading
+if (window.Flourish && window.Flourish.init) {
+window.Flourish.init();
+}
+});
+</script>
+</body>
+</html>
