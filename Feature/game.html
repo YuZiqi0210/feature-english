@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜車牌價格小遊戲 - 香港特別車牌拍賣挑戰</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* 避免選中按鈕文字，體驗更乾淨 */
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .game-container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        .game-header {
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .game-header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .game-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .score-area {
+            background: #2c3e50;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .score-area span:first-child {
+            font-size: 14px;
+        }
+        
+        .score-area span:last-child {
+            font-size: 20px;
+            color: #f5af19;
+        }
+        
+        .question-area {
+            padding: 30px 20px 20px;
+            text-align: center;
+        }
+        
+        .license-plate {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        
+        .plate-text {
+            font-size: 56px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #f5af19;
+            text-shadow: 2px 2px 0 #f12711;
+            font-family: 'Courier New', 'SF Mono', monospace;
+            word-break: break-all;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .option-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .option-btn:hover:not(:disabled) {
+            background: #e9ecef;
+            transform: translateX(5px);
+            border-color: #f5af19;
+        }
+        
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+        
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .option-prefix {
+            font-weight: bold;
+            color: #2c3e50;
+            background: #e9ecef;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 40px;
+        }
+        
+        .option-btn.correct .option-prefix {
+            background: #28a745;
+            color: white;
+        }
+        
+        .option-btn.wrong .option-prefix {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .result-area {
+            background: #f0f4f8;
+            border-radius: 20px;
+            padding: 18px;
+            margin: 15px 0;
+            text-align: left;
+            display: none;
+            border-left: 6px solid;
+            transition: 0.2s;
+        }
+        
+        .result-area.show {
+            display: block;
+            animation: fadeIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        
+        .result-correct {
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .result-wrong {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .result-price {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin: 8px 0;
+            background: rgba(255,255,200,0.5);
+            padding: 6px 12px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+        
+        .next-btn {
+            background: linear-gradient(135deg, #f5af19, #f12711);
+            border: none;
+            border-radius: 60px;
+            padding: 14px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.25s, box-shadow 0.2s;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .next-btn.show {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+        }
+        
+        .game-status {
+            text-align: center;
+            padding: 18px;
+            font-size: 14px;
+            color: #5d6d7e;
+            border-top: 1px solid #eef2f5;
+            background: #fef9ef;
+            font-weight: 500;
+        }
+        
+        .feedback-icon {
+            font-size: 22px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 小型手機適配 */
+        @media (max-width: 480px) {
+            .plate-text {
+                font-size: 38px;
+                letter-spacing: 2px;
+            }
+            .option-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+            .game-header h1 {
+                font-size: 20px;
+            }
+        }
+        
+        /* 完成狀態動畫 */
+        .complete-celebrate {
+            background: linear-gradient(135deg, #2b7a4b, #1f5e3a);
+            border-radius: 24px;
+            padding: 20px;
+            color: white;
+        }
+        
+        .restart-tip {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #c9e9d6;
+        }
+        
+        .mini-restart {
+            background: rgba(255,255,240,0.2);
+            border: 1px solid gold;
+            border-radius: 60px;
+            padding: 8px 16px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 12px;
+            transition: 0.2s;
+        }
+        
+        .mini-restart:hover {
+            background: rgba(255,215,0,0.4);
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🚗 猜猜呢個車牌幾多錢？</h1>
+            <p>香港運輸署特殊車牌拍賣價格挑戰</p>
+        </div>
+        
+        <div class="score-area">
+            <span>📊 進度</span>
+            <span id="progress">第 1 / 0 題</span>
+        </div>
+        
+        <div class="question-area">
+            <div class="license-plate">
+                <div class="plate-text" id="licensePlate">---</div>
+            </div>
+            <div class="question-text">
+                🤔 呢個車牌喺拍賣會上成交價係幾多？
+            </div>
+            
+            <div class="options" id="optionsContainer">
+            </div>
+            
+            <div class="result-area" id="resultArea">
+                <div id="resultMessage"></div>
+            </div>
+            
+            <button class="next-btn" id="nextBtn">下一題 ➡️</button>
+            <!-- 加入一個隱藏的重置按鈕 (完成介面動態加入) 但先預留容器 -->
+        </div>
+        
+        <div class="game-status" id="gameStatus">
+            🏆 共 <span id="totalCount">0</span> 個特殊車牌等你估！
+        </div>
+    </div>
+
+    <script>
+        // ---------- 精選香港車牌真實拍賣數據 (趣味+教育) ----------
+        const licenseData = [
+            {"plate": "18", "price": 2100000, "priceDisplay": "210萬港元"},
+            {"plate": "1 L0VE U", "price": 1400000, "priceDisplay": "140萬港元"},
+            {"plate": "WE", "price": 650000, "priceDisplay": "65萬港元"},
+            {"plate": "CCUE", "price": 460000, "priceDisplay": "46萬港元"},
+            {"plate": "H 8888 H", "price": 145000, "priceDisplay": "14.5萬港元"},
+            {"plate": "BEST", "price": 125000, "priceDisplay": "12.5萬港元"},
+            {"plate": "G00D DAY", "price": 120000, "priceDisplay": "12萬港元"},
+            {"plate": "LOVE1314", "price": 120000, "priceDisplay": "12萬港元"},
+            {"plate": "BE BE", "price": 110000, "priceDisplay": "11萬港元"},
+            {"plate": "BOND 007", "price": 105000, "priceDisplay": "10.5萬港元"}
+        ];
+        
+        // ---------- 遊戲狀態 ----------
+        let currentIndex = 0;
+        let shuffledData = [];
+        let answered = false;
+        let currentQuestion = null;
+        let currentOptions = [];
+        
+        // 輔助函數：將價格轉為更親切的展示 (用於選項)
+        function getPriceDisplay(price) {
+            if (price >= 10000000) {
+                return (price / 1000000).toFixed(0) + "千萬港元";
+            } else if (price >= 10000) {
+                let wan = price / 10000;
+                // 保留整數或小數點後一位 (美觀)
+                if (wan >= 10) return Math.round(wan) + "萬港元";
+                return wan.toFixed(1) + "萬港元";
+            }
+            return price.toLocaleString() + "港元";
+        }
+        
+        // 取得原始正確價格的顯示 (來自數據或由函數生成)
+        function getOriginalPriceDisplay(question) {
+            if (question.priceDisplay) {
+                return question.priceDisplay;
+            }
+            return getPriceDisplay(question.price);
+        }
+        
+        // 產生兩個選項：一個正確金額，一個聰明幹擾金額 (基於正確金額浮動，且避免過於離譜)
+        function generateOptions(correctPrice) {
+            // 策略: 針對香港車牌一般幾萬至幾百萬，隨機決定高估/低估區間，更趣味
+            let wrongPrice;
+            const strategy = Math.random();
+            
+            if (strategy < 0.4) {
+                // 低估 20% ~ 55%
+                let factor = 0.45 + Math.random() * 0.35; // 0.45~0.8倍
+                wrongPrice = correctPrice * factor;
+            } else if (strategy < 0.75) {
+                // 高估 1.3倍 ~ 2.2倍 
+                let factor = 1.3 + Math.random() * 0.9;
+                wrongPrice = correctPrice * factor;
+            } else {
+                // 極端干擾: 有可能超高或超低
+                if (Math.random() > 0.5) {
+                    wrongPrice = correctPrice * (2.5 + Math.random() * 1.2);
+                } else {
+                    wrongPrice = correctPrice * (0.2 + Math.random() * 0.3);
+                }
+            }
+            
+            // 取整至千位或萬位讓選項更好閱讀
+            if (wrongPrice > 100000) {
+                wrongPrice = Math.round(wrongPrice / 10000) * 10000;
+            } else if (wrongPrice > 10000) {
+                wrongPrice = Math.round(wrongPrice / 1000) * 1000;
+            } else {
+                wrongPrice = Math.round(wrongPrice / 500) * 500;
+            }
+            // 避免低於1000港元不合理 (車牌再便宜也要千元)
+            if (wrongPrice < 1000) wrongPrice = 1500;
+            if (wrongPrice === correctPrice) wrongPrice = wrongPrice * 1.2;
+            
+            const options = [
+                { price: correctPrice, isCorrect: true },
+                { price: wrongPrice, isCorrect: false }
+            ];
+            // 隨機順序
+            return options.sort(() => Math.random() - 0.5);
+        }
+        
+        // 顯示題目及選項按鈕
+        function renderQuestion() {
+            if (currentIndex >= shuffledData.length) {
+                // 遊戲完成，顯示華麗完成介面
+                const licenseDiv = document.getElementById("licensePlate");
+                licenseDiv.textContent = "🎉 全數過關 🎉";
+                const questionDiv = document.querySelector(".question-text");
+                questionDiv.innerHTML = "✨ 你已經精通香港特色車牌拍賣價格！ ✨<br>📢 分享比朋友一齊挑戰啦！";
+                const optionsContainer = document.getElementById("optionsContainer");
+                optionsContainer.innerHTML = "";
+                document.getElementById("nextBtn").classList.remove("show");
+                document.getElementById("resultArea").classList.remove("show");
+                
+                // 遊戲底欄美化
+                const statusDiv = document.getElementById("gameStatus");
+                statusDiv.innerHTML = `🎊 恭喜完成所有車牌估價！ 🎊<br><span class="mini-restart" id="restartGameBtn">🔄 重新挑戰 🔄</span>`;
+                // 增加重新開始事件
+                const restartBtn = document.getElementById("restartGameBtn");
+                if (restartBtn) {
+                    restartBtn.onclick = () => {
+                        resetAndRestart();
+                    };
+                }
+                return;
+            }
+            
+            currentQuestion = shuffledData[currentIndex];
+            document.getElementById("licensePlate").textContent = currentQuestion.plate;
+            document.getElementById("progress").textContent = `第 ${currentIndex + 1} / ${shuffledData.length} 題`;
+            
+            // 生成全新選項
+            currentOptions = generateOptions(currentQuestion.price);
+            
+            const optionsContainer = document.getElementById("optionsContainer");
+            optionsContainer.innerHTML = "";
+            
+            // 創建兩個選項按鈕
+            currentOptions.forEach((option, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                const prefixLetter = String.fromCharCode(65 + idx); // A, B
+                btn.innerHTML = `
+                    <span class="option-prefix">${prefixLetter}</span>
+                    <span style="flex:1; text-align:center; font-weight:600;">${getPriceDisplay(option.price)}</span>
+                    <span style="width:28px;"></span>
+                `;
+                btn.onclick = () => checkAnswer(option.isCorrect, option.price);
+                optionsContainer.appendChild(btn);
+            });
+            
+            answered = false;
+            const resultArea = document.getElementById("resultArea");
+            resultArea.classList.remove("show");
+            const nextBtn = document.getElementById("nextBtn");
+            nextBtn.classList.remove("show");
+            
+            // 重新啟用按鈕並清除背景特效
+            document.querySelectorAll(".option-btn").forEach(btn => {
+                btn.disabled = false;
+                btn.classList.remove("correct", "wrong");
+            });
+        }
+        
+        // 核對答案
+        function checkAnswer(isCorrect, selectedPrice) {
+            if (answered) return;
+            answered = true;
+            
+            const resultArea = document.getElementById("resultArea");
+            const resultMessage = document.getElementById("resultMessage");
+            
+            // 停用所有選項
+            const allBtns = document.querySelectorAll(".option-btn");
+            allBtns.forEach(btn => { btn.disabled = true; });
+            
+            // 標記正確與錯誤選擇
+            allBtns.forEach((btn, idx) => {
+                const optionPrice = currentOptions[idx].price;
+                if (optionPrice === currentQuestion.price) {
+                    btn.classList.add("correct");
+                } 
+                if (!isCorrect && optionPrice === selectedPrice) {
+                    btn.classList.add("wrong");
+                }
+            });
+            
+            const correctDisplay = getOriginalPriceDisplay(currentQuestion);
+            const selectedDisplay = getPriceDisplay(selectedPrice);
+            
+            if (isCorrect) {
+                resultMessage.innerHTML = `
+                    <div class="result-correct">
+                        <span class="feedback-icon">✅🎉</span> 叻叻！答案正確！
+                    </div>
+                    <div class="result-price">
+                        💰 實際成交價格：${correctDisplay}
+                    </div>
+                    <div style="margin-top: 8px; font-size:14px;">🏆 下一個車牌更刺激！</div>
+                `;
+            } else {
+                resultMessage.innerHTML = `
+                    <div class="result-wrong">
+                        <span class="feedback-icon">❌😢</span> 哎呀估錯咗～
+                    </div>
+                    <div class="result-price">
+                        💰 正確成交價：${correctDisplay}
+                    </div>
+                    <div class="result-price" style="background:#ffe0b5;">
+                        📊 你揀嘅價格：${selectedDisplay}
+                    </div>
+                    <div style="margin-top:6px; font-size:13px;">💡 記低價位，下次就係專家！</div>
+                `;
+            }
+            
+            resultArea.classList.add("show");
+            document.getElementById("nextBtn").classList.add("show");
+        }
+        
+        // 下一題邏輯
+        function nextQuestion() {
+            if (!answered) return;
+            currentIndex++;
+            renderQuestion();
+        }
+        
+        // 洗牌函數 (Fisher-Yates)
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+        
+        // 重置並重新開始遊戲
+        function resetAndRestart() {
+            // 重新洗牌
+            shuffledData = shuffleArray([...licenseData]);
+            currentIndex = 0;
+            answered = false;
+            currentQuestion = null;
+            
+            // 重置UI狀態，移除結果顯示區
+            document.getElementById("resultArea").classList.remove("show");
+            document.getElementById("nextBtn").classList.remove("show");
+            
+            // 恢復底欄初始文字
+            const statusDiv = document.getElementById("gameStatus");
+            statusDiv.innerHTML = `🏆 共 <span id="totalCount">${shuffledData.length}</span> 個特殊車牌等你估！`;
+            
+            // 重新渲染題目
+            renderQuestion();
+        }
+        
+        // 初始化遊戲 (也是重新挑戰入口)
+        function initGame() {
+            if (!licenseData.length) {
+                document.getElementById("licensePlate").textContent = "⚠️ 無數據";
+                document.querySelector(".question-text").innerHTML = "請更新車牌資料庫";
+                return;
+            }
+            // 隨機排序題目順序
+            shuffledData = shuffleArray([...licenseData]);
+            currentIndex = 0;
+            answered = false;
+            document.getElementById("totalCount").innerText = shuffledData.length;
+            renderQuestion();
+        }
+        
+        // 綁定下一題按鈕事件
+        document.getElementById("nextBtn").onclick = nextQuestion;
+        
+        // 添加手動重置機制: 如果玩家在遊戲途中點擊底欄的重置按鈕（但一般底欄只有完成後出現重置）,
+        // 另外在遊戲未完成時也想加一個輕量重置? 為了更好的用戶體驗，在牌局右上可加點擊「重新開始」
+        // 但為避免UI混亂，增加一個浮動簡單刷新? 在遊戲status區加上重玩圖標（不影響主體）
+        // 另外若完成後重置按鈕已有，但是玩家未完成想重新開始? 可以在game-status 加上一個小的刷新ICON
+        const enhanceStatus = () => {
+            const gameStatusDiv = document.getElementById("gameStatus");
+            if (!gameStatusDiv.querySelector('.restart-early')) {
+                const restartEarlySpan = document.createElement('span');
+                restartEarlySpan.className = 'mini-restart restart-early';
+                restartEarlySpan.style.marginLeft = '12px';
+                restartEarlySpan.style.fontSize = '12px';
+                restartEarlySpan.innerHTML = '🔄 重新遊戲';
+                restartEarlySpan.onclick = (e) => {
+                    e.stopPropagation();
+                    if (confirm('重新開始會重置所有進度，確定要重新挑戰嗎？')) {
+                        resetAndRestart();
+                    }
+                };
+                gameStatusDiv.appendChild(restartEarlySpan);
+            }
+        };
+        
+        // 初始調用增強
+        initGame();
+        // 因為init後會重新渲染，等DOM穩定再增強底部區域
+        setTimeout(() => {
+            enhanceStatus();
+            // 確保總數更新
+            const totalSpan = document.getElementById("totalCount");
+            if (totalSpan) totalSpan.innerText = shuffledData.length;
+        }, 50);
+        
+        // 如果遊戲重新渲染後需要重新綁定重置 (當完成畫面動態生成後resetAndRestart本身會調用renderQuestion, 但早期restart按鈕依然需保留)
+        // 在resetAndRestart後也要確保底欄按鈕再次出現
+        const originalReset = resetAndRestart;
+        window.resetAndRestart = resetAndRestart; // export for safety
+        
+        // 動態監聽完成區自定義重置後重新綁定“重新遊戲”按鈕
+        const observer = new MutationObserver(() => {
+            const earlyBtn = document.querySelector('.restart-early');
+            if (earlyBtn && earlyBtn.onclick !== (() => {})) {
+                earlyBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if (confirm('重新開始會重置所有進度，確定要重新挑戰嗎？')) {
+                        resetAndRestart();
+                    }
+                };
+            }
+            const completeRestart = document.getElementById("restartGameBtn");
+            if (completeRestart && !completeRestart.hasClickListener) {
+                const newBtn = completeRestart.cloneNode(true);
+                completeRestart.parentNode?.replaceChild(newBtn, completeRestart);
+                newBtn.addEventListener('click', () => {
+                    resetAndRestart();
+                });
+                newBtn.hasClickListener = true;
+            }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+    </script>
+</body>
+</html>
